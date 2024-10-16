@@ -83,7 +83,7 @@
                         
                         <input type="password" placeholder="Create password"  id="pass-signup" required>
                       
-                        <button type="button" id="submit" onclick="submitForm(event); goBack();">Submit</button>
+                        <button type="button" id="submit" onclick="submitForm(event);">Submit</button>
                     </form>
                 
 
@@ -128,12 +128,10 @@ function logIn(event)
             
             alert(`Welcome ${fisrtName} ${lastName} `);
           
-          }
-           
-          setTimeout(function goBack(){
+           setTimeout(function goBack(){
             document.querySelector('.login').classList.remove('hideLogin');
             document.querySelector('.sign-up').classList.remove('signing-up');
-          }, 5000);
+          }, 5000); }
         </script>
     </body>
 </html>
