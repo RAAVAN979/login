@@ -117,8 +117,8 @@ function logIn(event)
 
 
            
-            function submitForm(){
-
+            function submitForm(event){
+                event.preventDefault();
               let emailN = document.getElementById('email-signup').value;
               let passN = document.getElementById('pass-signup').value;
                 let fisrtName = document.getElementById('Fname').value;
