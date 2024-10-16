@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="BISHAL PANDEY">
+    <meta charset="UTF-8">
+    <meta name="viewport" width="device-width, initial-scale=0">
+
+    <style> 
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center; height: 100vh; margin: 0;  background-color: black;      }
+
+        .container{justify-content: center;
+        align-items: center; width: 600px; height: 500px; border: 2px solid black; display: flex; padding: 20px; float: center; flex-direction: column;}
+
+      form{opacity: 0.8; width: 300px;
+    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center; border: 2px black; background: linear-gradient(to right, #ffff66 0%, #003300 100%); display: flex; border-radius: 15%; flex-direction: column; gap: 20px;}
+
+    input{ margin: 5px; border: 2px solid silver; border-radius: 20px; width: 180px; height: 20px;  }
+
+    .log{
+        max-width:90px;  align-items: center; float: left; height: 20px;}
+
+        .sign{ max-width:90px;  height: 20px;  }
+
+        .butn { display: flex; gap: 10px; margin-top: 10px; }
+
+
+
+      
+
+        .sign-up{display: none;  }
+         
+
+         .signing-up{
+            display: block; display: flex;
+         }
+
+         .hideLogin{
+            display: none;
+         }
+
+        
+        
+
+      #error{
+        text-align:center; font-family: verdana; padding: 5px 5px 5px 5px; color: white;
+
+
+      }
+    
+    </style>
+    </head>
+    <body>
+
+
+        <div class="container">
+        <form class="login">
+          <p id="error"></p>
+                <input type="email" placeholder="Enter your email...."  required  id="emaiL" >
+                <input type="password" placeholder="Enter your password...." equired id="passL" >
+                <div class="butn">
+                <button id="log"  onclick="logIn(event);">LOG IN</button>
+                
+        </form>
+      
+
+        <button id="sign" onclick="hideMe()">SIGN UP</button>
+       
+        
+      </div>
+                
+
+                
+               
+
+                
+                    <form class="sign-up">
+                        <input type="text" placeholder="First Name"  id="Fname" required>
+                        <input type="text" placeholder="Last Name"  id="name" required>
+                        <input type="email" placeholder="Enter your email"  id="email-signup" required>
+                        
+                        <input type="password" placeholder="Create password"  id="pass-signup" required>
+                      
+                        <button type="button" id="submit" onclick="submitForm(), goBack();">Submit</button>
+                    </form>
+                
+
+            
+
+        <script>
+
+        
+function logIn(event)
+
+           {event.preventDefault(); 
+
+            let emailP = document.getElementById('emaiL').value;
+            let passP = document.getElementById('passL').value;
+            let storedEmail = localStorage.getItem(emailP);
+
+            
+                if (storedEmail && storedEmail === passP) { window.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+                  return false;
+                }
+                 else { document.getElementById('error').innerText = "Invalid Email or Password";
+                  return false;
+                 }
+                }
+            
+
+            function hideMe() {
+              document.querySelector('.sign-up').classList.add('signing-up');
+              document.querySelector('.login').classList.add('hideLogin');
+            }
+
+
+           
+            function submitForm(){
+
+              let emailN = document.getElementById('email-signup').value;
+              let passN = document.getElementById('pass-signup').value;
+                let fisrtName = document.getElementById('Fname').value;
+              let lastName = document.getElementById('name').value;
+            
+             localStorage.setItem(emailN, passN);
+            
+            alert(`Welcome ${fisrtName} ${lastName} `);
+          
+          }
+           
+          setTimeout(
+            
+          function goBack(){
+            document.querySelector('.login').classList.remove('hideLogin');
+            document.querySelector('.sign-up').classList.remove('signing-up');
+          }, 5000)
+        </script>
+    </body>
+</html>
