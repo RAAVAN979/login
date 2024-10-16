@@ -14,8 +14,8 @@
         .container{justify-content: center;
         align-items: center; width: 600px; height: 500px; border: 2px solid black; display: flex; padding: 20px; float: center; flex-direction: column;}
 
-      form{opacity: 0.8; width: 300px;
-    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center; border: 2px black; background: linear-gradient(to right, #ffff66 0%, #003300 100%); display: flex; border-radius: 15%; flex-direction: column; gap: 20px;}
+      form{opacity: 1; width: 300px;
+    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center; border: 2px black; background-color: silver; display: flex; border-radius: 20px; flex-direction: column; gap: 20px;}
 
     input{ margin: 5px; border: 2px solid silver; border-radius: 20px; width: 180px; height: 20px;  }
 
@@ -130,12 +130,10 @@ function logIn(event)
           
           }
            
-          setTimeout(
-            
-          function goBack(){
+          setTimeout(function goBack(){
             document.querySelector('.login').classList.remove('hideLogin');
             document.querySelector('.sign-up').classList.remove('signing-up');
-          }, 5000)
+          }, 5000);
         </script>
     </body>
 </html>
