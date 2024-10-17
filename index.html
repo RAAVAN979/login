@@ -70,36 +70,29 @@
                 <input type="password" placeholder="Enter your password...." equired id="passL" >
                 <div class="butn">
                 <button id="log"  type="button"  onclick="logIn(event);">LOG IN</button>
-                
-        </form>
-      
-
-        <button id="sign" type="button" onclick="hideMe();">SIGN UP</button>
+                </form>
        
+                 <button id="sign" type="button" onclick="hideMe();">SIGN UP</button>
         </div>
-        
-      </div>
-                
-
-                
-               
-
-                
-                    <form class="sign-up">
+           <form class="sign-up">
+                        <p id="welcome"></p>
                         <input type="text" placeholder="First Name"  id="Fname" required>
                         <input type="text" placeholder="Last Name"  id="name" required>
                         <input type="email" placeholder="Enter your email"  id="email-signup" required>
                         
                         <input type="password" placeholder="Create password"  id="pass-signup" required>
                       
-                        <button type="button" id="submit" onclick="submitForm(event);">Submit</button>
+                        <button type="button"  id="submit" onclick="submitForm(event)">Submit</button>
                     </form>
-                
-
-                    
+      
+             
         
                     <script>
                       
+
+                     
+
+
 
                       function logIn(event) {
     event.preventDefault();
@@ -108,36 +101,39 @@
     let sucessPass = localStorage.getItem(emailP);
 
     if (sucessPass && sucessPass === passP) {
-      windows.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+      window.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
     } else {document.getElementById('error').innerText = `Invalid Email Or Password`;}
   }
 
 
-  
-  
 
-    
  function hideMe() {
     document.querySelector('.sign-up').classList.add('signing-up');
     document.querySelector('.login').classList.add('hideLogin');
-  };
+  }
 
-  
 
-      function submitForm() {
-    
-    let emailN = document.getElementById('email-signup').value;
-    let passN = document.getElementById('pass-signup').value;
-    let firstName = document.getElementById('Fname').value;
-    let lastName = document.getElementById('name').value;
+   function submitForm(event) {
+                        event.preventDefault();
 
-    localStorage.setItem(emailN, passN);
+                        const emailN = document.getElementById('email-signup').value;
+                        const passN = document.getElementById('pass-signup').value;
+                        const nameF = document.getElementById('Fname').value;
+                        const nameL = document.getElementById('name').value;
 
-    document.getElementById('welcome').innerText = `Welcome ${firstName} ${lastName}`;
-  
- 
- 
-} console.log(submitForm);
+                        localStorage.setItem(emailN, passN);
+
+
+
+                        document.getElementById('welcome').innerText = `Thank you for signing up ${nameF} ${nameL}`;
+
+
+                        setTimeout( function goBack (){
+                          document.querySelector('.sign-up').classList.remove('signing-up');
+    document.querySelector('.login').classList.remove('hideLogin');
+                        }, 5000);
+                      }
+
 
 </script>
 
