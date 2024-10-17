@@ -1,142 +1,198 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="author" content="BISHAL PANDEY">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta name="author" content="BISHAL PANDEY" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style> 
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center; height: 100vh; margin: 0;  background-color: silver;      }
-
-        .container{justify-content: center;
-        align-items: center; width: 600px; height: 500px;  display: flex; padding: 20px; float: center; flex-direction: column;}
-
-      form{opacity: 1; width: 300px;
-    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center;  background-color: silver; display: flex; border-radius: 20px; flex-direction: column; gap: 20px;}
-
-    input{ margin: 5px; border: 2px solid silver; border-radius: 20px; width: 180px; height: 20px;  border: none; text-align: center; padding: 0px 5px 0px 0px;}
-
-    #log{
-        max-width:90px;  align-items: center; float: left; height: 20px; background-color: blue; border: 1px solid white; border-radius: 20%; color: white; font-family: verdana
-        ; cursor: pointer;}
-
-        #sign{ max-width:90px;  height: 20px;  cursor: pointer; }
-
-        .butn { display: flex; gap: 10px; margin-top: 10px; }
-
-
-
-      
-
-        .sign-up{display: none;  }
-         
-
-         .signing-up{
-            display: block; display: flex;
-         }
-
-         .hideLogin{
-            display: none;
-         }
-
-        
-        
-
-      #error{
-        text-align:center; font-family: verdana; padding: 5px 5px 5px 5px; color: red;
-
-
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: rgba(30, 50, 50, 7);
       }
 
-      #submit{
+      .container {
+        justify-content: center;
+        border: 2px solid black;
+        align-items: center;
+        width: 60%;
+        height: 50%px;
+        display: flex;
+        padding: 20%;
+        float: center;
+        flex-direction: column;
+      }
+
+      form {
+        border: 2px solid yellow;
+        width: 100%;
+        height: 100%;
+        padding: 0px 30px 50px 20px;
+        line-height: 5px;
+        align-items: center;
+        justify-content: center;
+        background-color: silver;
+        display: flex;
+        border-radius: 20px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      input {
+        margin: 5px;
+        border: 2px solid silver;
+        border-radius: 20px;
+        width: 180px;
+        height: 20px;
+        border: none;
+        text-align: center;
+        padding: 0px 5px 0px 0px;
+      }
+
+      #log {
+        width: 90px;
+        align-items: center;
+        float: left;
+        height: 20px;
+        background-color: blue;
+        border: 1px solid white;
+        border-radius: 20%;
+        color: white;
+        font-family: verdana;
         cursor: pointer;
       }
 
-      
+      #sign {
+        width: 90px;
+        cursor: pointer;
+      }
+
+      .butn {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .sign-up {
+        display: none;
+      }
+
+      .signing-up {
+        display: block;
+        display: flex;
+      }
+
+      .hideLogin {
+        display: none;
+      }
+
+      .come {
+        color: white;
+        font-family: verdana;
+        font-size: 20px;
+      }
+
+      #error {
+        text-align: center;
+        font-family: verdana;
+        padding: 5px 5px 5px 5px;
+        color: red;
+      }
+
+      #submit {
+        cursor: pointer;
+      }
     </style>
-    </head>
-    <body>
+  </head>
+  <body>
+    <div class="container">
+      <form class="login">
+        <p class="come">Welcome to the real world</p>
+        <p id="error"></p>
+        <input
+          id="emaiL"
+          type="email"
+          placeholder="Enter your email...."
+          required
+        />
+        <input
+          id="passL"
+          type="password"
+          placeholder="Enter your password...."
+          equired
+        />
+        <div class="butn">
+          <button id="log" type="button" onclick="logIn(event);">LOG IN</button>
 
-
-        <div class="container">
-        <form class="login" >
-          <p class="come">Welcome to the real world</p>
-          <p id="error"></p>
-                <input type="email" placeholder="Enter your email...."  required  id="emaiL" >
-                <input type="password" placeholder="Enter your password...." equired id="passL" >
-                <div class="butn">
-                <button id="log"  type="button"  onclick="logIn(event);">LOG IN</button>
-                </form>
-       
-                 <button id="sign" type="button" onclick="hideMe();">SIGN UP</button>
+          <button id="sign" type="button" onclick="hideMe();">SIGN UP</button>
         </div>
-           <form class="sign-up">
-                        <p id="welcome"></p>
-                        <input type="text" placeholder="First Name"  id="Fname" required>
-                        <input type="text" placeholder="Last Name"  id="name" required>
-                        <input type="email" placeholder="Enter your email"  id="email-signup" required>
-                        
-                        <input type="password" placeholder="Create password"  id="pass-signup" required>
-                      
-                        <button type="button"  id="submit" onclick="submitForm(event)">Submit</button>
-                    </form>
-      
-             
-        
-                    <script>
-                      
+        <a class="forgot" href="#">Forgot password? </a>
+      </form>
 
-                     
+      <form class="sign-up">
+        <p id="welcome"></p>
+        <input type="text" placeholder="First Name" id="Fname" required />
+        <input type="text" placeholder="Last Name" id="name" required />
+        <input
+          type="email"
+          placeholder="Enter your email"
+          id="email-signup"
+          required
+        />
 
+        <input
+          type="password"
+          placeholder="Create password"
+          id="pass-signup"
+          required
+        />
 
+        <button type="button" id="submit" onclick="submitForm()">Submit</button>
+      </form>
+    </div>
+    <script>
+      function logIn(event) {
+        event.preventDefault();
+        let emailP = document.getElementById("emaiL").value;
+        let passP = document.getElementById("passL").value;
+        let sucessPass = localStorage.getItem(emailP);
 
-                      function logIn(event) {
-    event.preventDefault();
-    let emailP = document.getElementById('emaiL').value;
-    let passP = document.getElementById('passL').value;
-    let sucessPass = localStorage.getItem(emailP);
+        if (sucessPass && sucessPass === passP) {
+          window.location.href =
+            "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+        } else {
+          document.getElementById(
+            "error"
+          ).innerText = `Invalid Email Or Password`;
+        }
+      }
 
-    if (sucessPass && sucessPass === passP) {
-      window.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
-    } else {document.getElementById('error').innerText = `Invalid Email Or Password`;}
-  }
+      function hideMe() {
+        document.querySelector(".sign-up").classList.add("signing-up");
+        document.querySelector(".login").classList.add("hideLogin");
+      }
 
+      function submitForm() {
+        const emailN = document.getElementById("email-signup").value;
+        const passN = document.getElementById("pass-signup").value;
+        const nameF = document.getElementById("Fname").value;
+        const nameL = document.getElementById("name").value;
 
+        localStorage.setItem(emailN, passN);
 
- function hideMe() {
-    document.querySelector('.sign-up').classList.add('signing-up');
-    document.querySelector('.login').classList.add('hideLogin');
-  }
+        document.getElementById(
+          "welcome"
+        ).innerText = `Thank you for signing up ${nameF} ${nameL}`;
 
-
-   function submitForm(event) {
-                        event.preventDefault();
-
-                        const emailN = document.getElementById('email-signup').value;
-                        const passN = document.getElementById('pass-signup').value;
-                        const nameF = document.getElementById('Fname').value;
-                        const nameL = document.getElementById('name').value;
-
-                        localStorage.setItem(emailN, passN);
-
-
-
-                        document.getElementById('welcome').innerText = `Thank you for signing up ${nameF} ${nameL}`;
-
-
-                        setTimeout( function goBack (){
-                          document.querySelector('.sign-up').classList.remove('signing-up');
-    document.querySelector('.login').classList.remove('hideLogin');
-                        }, 5000);
-                      }
-
-
-</script>
-
-        
-    </body>
+        setTimeout(function goBack() {
+          document.querySelector(".sign-up").classList.remove("signing-up");
+          document.querySelector(".login").classList.remove("hideLogin");
+        }, 5000);
+      }
+    </script>
+  </body>
 </html>
