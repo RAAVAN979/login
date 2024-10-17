@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,20 +10,21 @@
         body{
             display: flex;
             justify-content: center;
-            align-items: center; height: 100vh; margin: 0;  background-color: black;      }
+            align-items: center; height: 100vh; margin: 0;  background-color: silver;      }
 
         .container{justify-content: center;
-        align-items: center; width: 600px; height: 500px; border: 2px solid black; display: flex; padding: 20px; float: center; flex-direction: column;}
+        align-items: center; width: 600px; height: 500px;  display: flex; padding: 20px; float: center; flex-direction: column;}
 
       form{opacity: 1; width: 300px;
-    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center; border: 2px black; background-color: silver; display: flex; border-radius: 20px; flex-direction: column; gap: 20px;}
+    height: 300px; padding: 0px; line-height: 5px; align-items: center; justify-content: center;  background-color: silver; display: flex; border-radius: 20px; flex-direction: column; gap: 20px;}
 
-    input{ margin: 5px; border: 2px solid silver; border-radius: 20px; width: 180px; height: 20px;  }
+    input{ margin: 5px; border: 2px solid silver; border-radius: 20px; width: 180px; height: 20px;  border: none; text-align: center; padding: 0px 5px 0px 0px;}
 
-    .log{
-        max-width:90px;  align-items: center; float: left; height: 20px;}
+    #log{
+        max-width:90px;  align-items: center; float: left; height: 20px; background-color: blue; border: 1px solid white; border-radius: 20%; color: white; font-family: verdana
+        ; cursor: pointer;}
 
-        .sign{ max-width:90px;  height: 20px;  }
+        #sign{ max-width:90px;  height: 20px;  cursor: pointer; }
 
         .butn { display: flex; gap: 10px; margin-top: 10px; }
 
@@ -45,29 +47,36 @@
         
 
       #error{
-        text-align:center; font-family: verdana; padding: 5px 5px 5px 5px; color: white;
+        text-align:center; font-family: verdana; padding: 5px 5px 5px 5px; color: red;
 
 
       }
-    
+
+      #submit{
+        cursor: pointer;
+      }
+
+      
     </style>
     </head>
     <body>
 
 
         <div class="container">
-        <form class="login">
-          <p id="error">Welcome to the real world</p>
+        <form class="login" >
+          <p class="come">Welcome to the real world</p>
+          <p id="error"></p>
                 <input type="email" placeholder="Enter your email...."  required  id="emaiL" >
                 <input type="password" placeholder="Enter your password...." equired id="passL" >
                 <div class="butn">
-                <button id="log"  type="submit" onclick="logIn(event);">LOG IN</button>
+                <button id="log"  type="button"  onclick="logIn(event);">LOG IN</button>
                 
         </form>
       
 
-        <button id="sign" onclick="hideMe();">SIGN UP</button>
+        <button id="sign" type="button" onclick="hideMe();">SIGN UP</button>
        
+        </div>
         
       </div>
                 
@@ -83,82 +92,53 @@
                         
                         <input type="password" placeholder="Create password"  id="pass-signup" required>
                       
-                        <button type="button" id="submit" onsubmit="submitForm(event);">Submit</button>
+                        <button type="button" id="submit" onclick="submitForm(event);">Submit</button>
                     </form>
                 
 
-            
-
+                    
         
-        <script type="module">
-  // Import the necessary Firebase functions
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+                    <script>
+                      
 
-  // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDmK2AdZBBUHBDMkOeQi_eA94qklnQ87E0",
-    authDomain: "login-9880f.firebaseapp.com",
-    projectId: "login-9880f",
-    storageBucket: "login-9880f.appspot.com",
-    messagingSenderId: "363044743153",
-    appId: "1:363044743153:web:8d867d61b86e85e76ec650",
-    measurementId: "G-R0F1RJF19Q"
+                      function logIn(event) {
+    event.preventDefault();
+    let emailP = document.getElementById('emaiL').value;
+    let passP = document.getElementById('passL').value;
+    let sucessPass = localStorage.getItem(emailP);
+
+    if (sucessPass && sucessPass === passP) {
+      windows.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+    } else {document.getElementById('error').innerText = `Invalid Email Or Password`;}
+  }
+
+
+  
+  
+
+    
+ function hideMe() {
+    document.querySelector('.sign-up').classList.add('signing-up');
+    document.querySelector('.login').classList.add('hideLogin');
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  
 
-  // Sign up function
-  function submitForm(event) {
-    event.preventDefault();
+      function submitForm() {
+    
     let emailN = document.getElementById('email-signup').value;
     let passN = document.getElementById('pass-signup').value;
     let firstName = document.getElementById('Fname').value;
     let lastName = document.getElementById('name').value;
 
-    // Create a new user with email and password
-    createUserWithEmailAndPassword(auth, emailN, passN)
-      .then((userCredential) => {
-        // User signed up successfully
-        const user = userCredential.user;
-        alert(`Welcome ${firstName} ${lastName}!`);
-        setTimeout(function goBack() {
-          document.querySelector('.login').classList.remove('hideLogin');
-          document.querySelector('.sign-up').classList.remove('signing-up');
-        }, 5000);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        document.getElementById('error').innerText = errorMessage;
-      });
-  }
+    localStorage.setItem(emailN, passN);
 
-  // Log in function
-  function logIn(event) {
-    event.preventDefault();
-    let emailP = document.getElementById('emaiL').value;
-    let passP = document.getElementById('passL').value;
+    document.getElementById('welcome').innerText = `Welcome ${firstName} ${lastName}`;
+  
+ 
+ 
+} console.log(submitForm);
 
-    // Sign in the user with email and password
-    signInWithEmailAndPassword(auth, emailP, passP)
-      .then((userCredential) => {
-        // User signed in successfully
-        const user = userCredential.user;
-        window.location.href = "https://www.facebook.com/profile.php?id=100008715181012";
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        document.getElementById('error').innerText = "Invalid Email or Password";
-      });
-  }
-
-  // Function to show the signup form
-  function hideMe() {
-    document.querySelector('.sign-up').classList.add('signing-up');
-    document.querySelector('.login').classList.add('hideLogin');
-  }
 </script>
 
         
