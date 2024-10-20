@@ -155,44 +155,120 @@
       </form>
     </div>
     <script>
-      function logIn(event) {
-        event.preventDefault();
-        let emailP = document.getElementById("emaiL").value;
-        let passP = document.getElementById("passL").value;
-        let sucessPass = localStorage.getItem(emailP);
+      const firebaseConfig = {
+  apiKey: "AIzaSyDmK2AdZBBUHBDMkOeQi_eA94qklnQ87E0",
+  authDomain: "login-9880f.firebaseapp.com",
+  databaseURL: "https://login-9880f-default-rtdb.firebaseio.com",
+  projectId: "login-9880f",
+  storageBucket: "login-9880f.appspot.com",
+  messagingSenderId: "363044743153",
+  appId: "1:363044743153:web:f345b910ee8e622f6ec650",
+  measurementId: "G-0S5H6RMT9Z",
+};
 
-        if (sucessPass && sucessPass === passP) {
-          window.location.href =
-            "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
-        } else {
-          document.getElementById(
-            "error"
-          ).innerText = `Invalid Email Or Password`;
-        }
-      }
+const app = firebase.initializeApp(firebaseConfig);
 
-      function hideMe() {
-        document.querySelector(".sign-up").classList.add("signing-up");
-        document.querySelector(".login").classList.add("hideLogin");
-      }
+const auth = firebase.auth();
 
-      function submitForm() {
-        const emailN = document.getElementById("email-signup").value;
-        const passN = document.getElementById("pass-signup").value;
-        const nameF = document.getElementById("Fname").value;
-        const nameL = document.getElementById("name").value;
+const database = firebase.database();
 
-        localStorage.setItem(emailN, passN);
+function submitForm(event) {
+  event.preventDefault();
+  const emailN = document.getElementById("email-signup").value;
+  const passN = document.getElementById("pass-signup").value;
+  const nameF = document.getElementById("Fname").value;
+  const nameL = document.getElementById("name").value;
+  console.log(emailN, passN, nameF, nameL);
+  if (validateEmail(emailN) === false || validatePassword(passN) === false) {
+    document.getElementById(
+      "welcome"
+    ).innerText = `Email Or Password does not meet the requirement`;
+    return;
+  }
+  if (validateFirstname(nameF) === false || validateLastname(nameL) === false) {
+    document.getElementById("welcome").innerText = `Name field is missing`;
+    return;
+  }
 
-        document.getElementById(
-          "welcome"
-        ).innerText = `Thank you for signing up ${nameF} ${nameL}`;
+  auth.createUserWithEmailAndPassword(emailN, passN)
+    .then(function () {
+      var user = auth.currentUser;
 
-        setTimeout(function goBack() {
-          document.querySelector(".sign-up").classList.remove("signing-up");
-          document.querySelector(".login").classList.remove("hideLogin");
-        }, 5000);
-      }
+      var database_ref = database.ref();
+
+      var user_data = {
+        email: emailN,
+        nameF: nameF,
+        nameL: nameL,
+        last_login: Date.now(),
+      };
+
+      database_ref.child("users/" + user.uid).set(user_data);
+      document.getElementById("welcome").innerText =
+        "Your account is created successfully";
+    })
+    .catch(function (error) {
+      var error_code = error.code;
+      var error_message = error.message;
+      document.getElementById("welcome").innerText = error.message;
+    });
+}
+
+function validateEmail(email) {
+  expression = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (expression.test(email) === true) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validatePassword(password) {
+  if (password.length < 8) {
+    return false;
+  } else {
+    return true;
+  }
+}
+function validateFirstname(name) {
+  if (name === null) {
+    return false;
+  } else if (name.length <= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validateLastname(name) {
+  if (name === null) {
+    return false;
+  } else if (name.length <= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function logIn(event) {
+  event.preventDefault();
+  let emailP = document.getElementById("emaiL").value;
+  let passP = document.getElementById("passL").value;
+  let sucessPass = localStorage.getItem(emailP);
+
+  if (sucessPass && sucessPass === passP) {
+    window.location.href =
+      "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+  } else {
+    document.getElementById("error").innerText = `Invalid Email Or Password`;
+  }
+}
+
+function hideMe() {
+  document.querySelector(".sign-up").classList.add("signing-up");
+  document.querySelector(".login").classList.add("hideLogin");
+}
     </script>
   </body>
+     
+       
 </html>
