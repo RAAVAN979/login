@@ -175,6 +175,19 @@ const auth = firebase.auth();
 
 const database = firebase.database();
 
+      function logIn(event) {
+  event.preventDefault();
+  let emailP = document.getElementById("emaiL").value;
+  let passP = document.getElementById("passL").value;
+
+  auth.signInWithEmailAndPassword(emailP, passP)
+    .then(() => {
+      window.location.href = "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
+    })
+    .catch((error) => {
+      document.getElementById("error").innerText = `Invalid Email Or Password`;
+    });
+}
 function submitForm(event) {
   event.preventDefault();
   const emailN = document.getElementById("email-signup").value;
@@ -251,19 +264,7 @@ function validateLastname(name) {
   }
 }
 
-function logIn(event) {
-  event.preventDefault();
-  let emailP = document.getElementById("emaiL").value;
-  let passP = document.getElementById("passL").value;
-  let sucessPass = localStorage.getItem(emailP);
 
-  if (sucessPass && sucessPass === passP) {
-    window.location.href =
-      "https://www.facebook.com/profile.php?id=100005607379486&locale=en_GB";
-  } else {
-    document.getElementById("error").innerText = `Invalid Email Or Password`;
-  }
-}
 
 function hideMe() {
   document.querySelector(".sign-up").classList.add("signing-up");
