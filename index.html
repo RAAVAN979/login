@@ -154,6 +154,9 @@
         <button type="button" id="submit" onclick="submitForm()">Submit</button>
       </form>
     </div>
+     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
     <script>
       const firebaseConfig = {
   apiKey: "AIzaSyDmK2AdZBBUHBDMkOeQi_eA94qklnQ87E0",
@@ -178,7 +181,7 @@ function submitForm(event) {
   const passN = document.getElementById("pass-signup").value;
   const nameF = document.getElementById("Fname").value;
   const nameL = document.getElementById("name").value;
-  console.log(emailN, passN, nameF, nameL);
+
   if (validateEmail(emailN) === false || validatePassword(passN) === false) {
     document.getElementById(
       "welcome"
@@ -190,8 +193,7 @@ function submitForm(event) {
     return;
   }
 
-  auth.createUserWithEmailAndPassword(emailN, passN)
-    .then(function () {
+  auth.createUserWithEmailAndPassword(emailN, passN).then(function () {
       var user = auth.currentUser;
 
       var database_ref = database.ref();
